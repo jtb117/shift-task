@@ -1,0 +1,18 @@
+{
+    "cognitive_atlas_task_id": "trm_5696c3fa0061a",
+    "instructions":"Respond to the stimuli on the screen.",
+    "description":"Expfactory experiment",
+    "url":"https://www.github.com/expfactory-experiments/shift-task",
+    "contributors": [
+            "Ian Eisenberg",
+            "Zeynep Enkavi",
+            "Patrick Bissett",
+            "Vanessa Sochat",
+            "Russell Poldrack"
+    ],
+    "exp_id": "shift-task",
+    "name": "Shift Task",
+    "reference": ["http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3264902/"],
+    "template": "jspsych",
+    "time": 22
+}
