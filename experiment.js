@@ -104,6 +104,38 @@ var getStim = function() {
     '<div class = shift_right><img class = shift_stim src = ' + stim_htmls[2] +
     '  </img></div>'
 }
+// NEW FUNCTION FOR INSTRUCTIONS PICTURE
+var getControls = function() {
+	stim_htmls = []
+	for ( var i = 0; i < 3; i++) {
+		stim_htmls.push(path_source + 'ex_' + position_array[i] + '.png')
+	}
+
+	return '<div class = shift_bottom_left><img class = shift_stim src = ' + stim_htmls[0] +
+    ' </img></div>' +
+    '<div class = shift_bottom_middle><img class = shift_stim src = ' + stim_htmls[1] +
+    '  </img></div>' +
+    '<div class = shift_bottom_right><img class = shift_stim src = ' + stim_htmls[2] +
+    '  </img></div>'
+}
+
+var getInstructStim = function() {
+	var colors = jsPsych.randomization.shuffle(stim_att.color)
+	var shapes = jsPsych.randomization.shuffle(stim_att.shape)
+	var patterns = jsPsych.randomization.shuffle(stim_att.pattern)
+	stim_htmls = []
+	for ( var i = 0; i < 3; i++) {
+		stim_htmls.push(path_source + colors[i] + '_' + shapes[i] + '_' + patterns[i] + '.png')
+	}
+	
+	return '<div class = shift_bottom_left><img class = shift_stim src = ' + stim_htmls[0] +
+    ' </img></div>' +
+    '<div class = shift_bottom_middle><img class = shift_stim src = ' + stim_htmls[1] +
+    '  </img></div>' +
+    '<div class = shift_bottom_right><img class = shift_stim src = ' + stim_htmls[2] +
+    '  </img></div>'
+}
+// END ADD
 
 var getFeedback = function() {
   var last_trial = jsPsych.data.getLastTrialData()
@@ -274,9 +306,16 @@ var instructions_block = {
   },
   pages: [
     getStim() +
-    '<div class = instructionbox><p class = block-text>On each trial of this experiment three patterned objects will be presented. They will differ in their color, shape and internal pattern.</p><p class = block-text>For instance, the objects may look something like this:</p></div><div class = navBox></div>',
-    '<div class = centerbox><p class = block-text>On each trial you select one of the objects to get points using the arrow keys (left, down and right keys for the left, middle and right objects, respectively). The object you choose determines the chance of getting a point.</p><p class = block-text>The objects differ in three dimensions: their color (red, blue, green), shape (square, circle, triangle) and pattern (lines, dots, waves). Only one dimension (color, shape or pattern) is relevant for determining the probability of winning a point at any time.</p><p class = block-text>One feature of that dimension will result in rewards more often than the others. For instance, if the relevant dimension is "color", "blue" objects may result in earning a point more often than "green" or "red" objects.</p><p class = block-text>Importantly, all rewards are probabilistic. This means that even the best object will sometimes not result in any points and bad objects can sometimes give points.</div>',
-    '<div class = centerbox><p class = block-text>The relevant dimension and feature can change between trials. One trial "color" may be the relevant dimension with "red" the relevant feature, while on the next trial "pattern" is the relevant dimension with "waves" the relevant feature.</p><p class = block-text>During an initial practice session these changes will be explicitly signaled and you will be told what the relevant feature is. During the main task, however, there will be no explicit instructions - you will have to figure out the relevant feature yourself.</p><p class = block-text>Your objective is to get as many point as possible! The trials go by quickly so you must respond quickly. There will be a number of breaks throughout the task. We will start with a practice session after you end instructions.</p></div>'
+    '<div class = instructionbox><p class = block-text><font size="+3"><b>Experiment:</b></font><br>You will be presented with three objects on each trial. Each will have a different color, shape and pattern.<br>For example, the three objects could look like this:</p></div><div class = navBox></div>',
+    getControls() + '<div class = centerbox><p class = block-text><font size="+3"><b>Controls:</b></font><br>You will have to select <b>one</b> of the three objects to earn points using the arrow keys.'+
+		'<ul><li>left arrow = left object</li><li>down arrow = middle object</li><li>right arrow = right object</li></ul></p><br><br><br><br><br><br><br></div>',
+	getInstructStim() +
+	'<div class = centerbox><p class = block-text><font size="+3"><b>Note:</b></font><br>Each object will have three different features:</p>'+
+		'<ul><li>color (<font color=#FF3333">red</font>, <font color=#0000FF>blue</font>, <font color=#158800>green</font>)</li>' +
+		'<li>shape (square, circle, triangle)</li><li>pattern (lines, dots, waves)</li></ul><br><br><br><br><br><br><br><br></div>',
+	'<div class = centerbox><p class = block-text><font size="+3"><b>Which to choose?</b></font><br>A specific color, shape, or pattern will determine the chance you win a point for that trial, but <b>only one</b> will be relevant at a time.<br>For example, if the high reward object is one whose color is <font color="blue">blue</font>, then selecting the <font color="blue">blue</font> object is more likely to grant you a point than the <font color="green">green</font>, or <font color="red">red</font>, objects.</p>'+
+	'<p class = block-text><font size="+3"><b>How to earn points?</b></font><br>Choose the object with the right feature! However, selecting the optimal feature can sometimes fail to yield a point, and selecting objects other than the optimal one could still earn you a point. This is determined by chance.<p class = block-text><font size="+3"><b>The feature changes?</b></font><br>The relevant option and feature can change between trials. On one trial, <font color="orange">color</font> may be the relevant feature with <font color="red">red</font> as the best option, while on the next trial <i>pattern</i> is the relevant feature with <i>waves</i> as the best option.</p></div>',
+    '<div class = centerbox><p class = block-text><font size="+3"><b>Up Next:</b></font><br>First, there will be a practice session where you will be told which option is the “best.” During the main task, however, you will have to figure out the relevant feature yourself.</p><p class = block-text>Try and get as many points as possible! The trials go by very quickly so you must respond quickly. There will be a few breaks throughout the main task. We will start with a practice session</p></div>'
   ],
   allow_keys: false,
   show_clickable_nav: true,
